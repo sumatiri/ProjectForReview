@@ -1,0 +1,5 @@
+package com.myRetailApp.Repository;
+
+public class ProductRepo {
+
+}

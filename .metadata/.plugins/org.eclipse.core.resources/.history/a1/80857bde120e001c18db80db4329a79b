@@ -1,0 +1,6 @@
+package com.myRetailApp.Repository;
+
+@Repository
+public class PriceRepo extends JpaRepository<Price,String> {
+
+}

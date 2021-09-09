@@ -1,0 +1,8 @@
+package com.myRetailApp.Repository;
+
+import org.springframework.stereotype.Repository;
+
+@Repository
+public class PriceRepo extends JpaRepository<> {
+
+}

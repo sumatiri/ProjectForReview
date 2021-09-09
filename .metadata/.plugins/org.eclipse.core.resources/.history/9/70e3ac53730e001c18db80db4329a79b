@@ -1,0 +1,107 @@
+package com.consumer.helper;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.HashMap;
+import java.util.Scanner;
+
+
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.consumer.Bean.ConfProperties;
+import com.consumer.Bean.ProductData;
+import com.consumer.Exceptions.ProductNotFoundException;
+
+public class Helper {
+	@Autowired
+	ConfProperties properties;
+	
+	public HashMap setGetConn(URL url,String[] key,String reqType) throws IOException {
+		
+		HashMap retMap=new HashMap();
+		HttpURLConnection conn=(HttpURLConnection)url.openConnection();
+		conn.setRequestMethod(reqType);
+		
+		conn.connect();
+	 
+		int responseCode=conn.getResponseCode();
+		
+		if(responseCode!=200) {
+			 throw new ProductNotFoundException("Product not found");
+		}else {
+			if(reqType.equalsIgnoreCase(properties.getGetreq())) {
+				retMap=readRes(url,key);
+			}
+		}
+		
+		return retMap;
+		 
+	}
+	
+	private HashMap readRes(URL url,String[] key) throws IOException, ParseException {
+		String inline="";
+		HashMap retMap=new HashMap();
+		Scanner sc=null;
+		try {
+		sc=new Scanner(url.openStream());
+		while (sc.hasNext()) {
+			 
+			inline+=sc.nextLine();
+		}
+		
+		}finally {
+			sc.close();
+		}
+		
+	 JSONParser parser=new JSONParser();
+		JSONObject obj=(JSONObject)parser.parse(inline);
+		for(int i=0;i<key.length;i++) {
+			Object name=(Object)obj.get(key[i]);
+			retMap.put(key[i], name);
+		}
+		return retMap;
+		
+	}
+	
+	private String createResponse(ProductData prod,HttpURLConnection con) throws IOException {
+		StringBuffer response=null;
+		JSONObject product=new JSONObject();
+		product.put(properties.getName(), prod.getName());
+		product.put(properties.getId(), prod.getId());
+		product.put(properties.getPrice(), prod.getCurrent_price().getValue());
+		product.put(properties.getCurr(), prod.getCurrent_price().getCurrencyCode());
+		
+		String jsonInputString=product.toJSONString();
+		
+		OutputStream out=null;
+		BufferedReader reader=null;
+		try {
+			out=con.getOutputStream();
+			out.write(jsonInputString.getBytes());
+			out.flush();
+			
+			int responseCode=con.getResponseCode();
+			if(responseCode==HttpURLConnection.HTTP_OK) {
+				reader=new BufferedReader(new InputStreamReader(con.getInputStream()));
+				String line=null;
+				response=new StringBuffer();
+				while((line=reader.readLine())!=null) {
+					response.append(line);
+				}
+				
+			}
+		}finally {
+			out.close();
+			reader.close();
+		}
+		return response.toString();
+	}
+
+}

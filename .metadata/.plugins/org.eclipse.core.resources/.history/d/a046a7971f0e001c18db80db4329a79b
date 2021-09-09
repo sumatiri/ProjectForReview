@@ -1,0 +1,5 @@
+package com.myRetailApp.Exceptions;
+
+public class ObjectNotFound implements RuntimeException {
+
+}

@@ -1,0 +1,59 @@
+package com.consumer.controller;
+
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.consumer.Bean.ConfProperties;
+import com.consumer.Bean.ProductData;
+import com.consumer.helper.Helper;
+
+@RestController
+public class TargetController {
+	
+	@Autowired
+	Helper helper;
+	
+	@Autowired
+	ConfProperties properties;
+	
+	@PostMapping(path="/products/{id}")
+	
+	public String create(@RequestBody ProductData prod) {
+		String response=null;
+		try {
+			response=helper.setPutPostConn(prod, properties.getPostreq());
+		}catch(IOException ie){
+			ie.printStackTrace();
+		}finally {
+			return response.toString();
+		}
+	}
+	
+	@PutMapping(path="products/{id}")
+	
+	public String update(@RequestBody ProductData prod) {
+		
+		String response=null;
+		
+		try {
+			URL url=new URL(properties.getProdurl()+prod.getId());
+			response=helper.setPutPostConn(prod, properties.getPutreq());
+		} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+		  return response.toString();
+		}
+	}
+
+}

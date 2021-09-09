@@ -1,0 +1,43 @@
+package com.myRetailApp.Services;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.myRetailApp.Bean.Price;
+import com.myRetailApp.Repository.PriceRepo;
+
+@Service
+
+public class PriceServiceImpl implements IPriceInfoService {
+
+	@Autowired
+	PriceRepo priceRep;
+	
+	
+	public Price getPriceDetails(String prodID) {
+		 Price pr=priceRep.getById(prodID);
+		 return pr;
+	}
+
+	 
+	public Price savePrice(Price prObject) {
+		 return priceRep.save(prObject);
+	}
+
+	 
+	public Price updatePrice(Price prObject) {
+		Price pr=priceRep.getById(prObject.getId());
+		
+		if(pr!=null) {
+			pr.setCurrencyCode(prObject.getCurrencyCode());
+			pr.setPrice(prObject.getPrice());
+		}else {
+			//Price not found with ID provided hence creating a new Price obj and sending
+			return priceRep.save(prObject);
+		}
+		
+		
+		return priceRep.save(pr);
+	}
+
+}

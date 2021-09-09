@@ -1,0 +1,9 @@
+package com.myRetailApp.controller;
+
+@RestController
+public class RetailAppController {
+	
+	
+
+
+}

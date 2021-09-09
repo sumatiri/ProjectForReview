@@ -1,0 +1,31 @@
+package com.myRetailApp;
+
+import org.junit.jupiter.api.Test;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.MockitoJUnitRunner;
+import org.springframework.boot.test.context.SpringBootTest;
+
+import com.myRetailApp.Repository.PriceRepo;
+import com.myRetailApp.Repository.ProductRepo;
+import com.myRetailApp.Services.PriceServiceImpl;
+import com.myRetailApp.Services.ProductServiceImpl;
+@RunWith(MockitoJUnitRunner.class)
+class MyRetailApplicationTests {
+
+	@Mock
+	ProductRepo prodRepo;
+	
+	@Mock
+	PriceRepo priceRepo;
+	
+	@InjectMocks
+	ProductServiceImpl prodSvcImpl;
+	
+	@InjectMocks
+	PriceServiceImpl prSvcImpl;
+	
+	 
+
+}

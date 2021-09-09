@@ -1,0 +1,5 @@
+package com.consumer.Exceptions;
+
+public class ProductExceptionController {
+
+}

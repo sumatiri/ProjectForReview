@@ -1,0 +1,5 @@
+package com.consumer.Bean;
+
+public class ProductData {
+
+}

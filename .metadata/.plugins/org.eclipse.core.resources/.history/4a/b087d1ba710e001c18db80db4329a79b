@@ -1,0 +1,63 @@
+package com.consumer.Bean;
+
+public class ConfProperties {
+	private String produrl;
+	private String priceurl;
+	private String getreq;
+	private String postreq;
+	private String putreq;
+	private String code;
+	
+	private String name;
+	private String price;
+	private String  curr;
+
+	public String getProdurl() {
+		return produrl;
+	}
+
+	public void setProdurl(String produrl) {
+		this.produrl = produrl;
+	}
+
+	public String getPriceurl() {
+		return priceurl;
+	}
+
+	public void setPriceurl(String priceurl) {
+		this.priceurl = priceurl;
+	}
+
+	public String getGetreq() {
+		return getreq;
+	}
+
+	public void setGetreq(String getreq) {
+		this.getreq = getreq;
+	}
+
+	public String getPostreq() {
+		return postreq;
+	}
+
+	public void setPostreq(String postreq) {
+		this.postreq = postreq;
+	}
+
+	public String getPutreq() {
+		return putreq;
+	}
+
+	public void setPutreq(String putreq) {
+		this.putreq = putreq;
+	}
+
+	public String getCode() {
+		return code;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
+	}
+
+}

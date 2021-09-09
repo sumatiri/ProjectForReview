@@ -1,0 +1,33 @@
+package com.consumer.helper;
+
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.HashMap;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.consumer.Bean.ConfProperties;
+
+public class Helper {
+	@Autowired
+	ConfProperties properties;
+	
+	public HashMap setGetConn(URL url,String[] key,String reqType) {
+		
+		HashMap retMap=new HashMap();
+		HttpURLConnection conn=(HttpURLConnection)url.openConnection();
+		conn.setRequestMethod(reqType);
+		
+		conn.connect();
+	 
+		int responseCode=conn.getResponseCode();
+		
+		if(responseCode!=200) {
+			 throw new ProductNotFoundException("Product not found");
+		}else {
+			
+		}
+		 
+	}
+
+}

@@ -1,0 +1,67 @@
+package com.consumer.helper;
+
+import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.HashMap;
+import java.util.Scanner;
+
+import org.apache.tomcat.util.json.JSONParser;
+import org.json.simple.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.consumer.Bean.ConfProperties;
+import com.consumer.Exceptions.ProductNotFoundException;
+
+public class Helper {
+	@Autowired
+	ConfProperties properties;
+	
+	public HashMap setGetConn(URL url,String[] key,String reqType) throws IOException {
+		
+		HashMap retMap=new HashMap();
+		HttpURLConnection conn=(HttpURLConnection)url.openConnection();
+		conn.setRequestMethod(reqType);
+		
+		conn.connect();
+	 
+		int responseCode=conn.getResponseCode();
+		
+		if(responseCode!=200) {
+			 throw new ProductNotFoundException("Product not found");
+		}else {
+			if(reqType.equalsIgnoreCase(properties.getGetreq())) {
+				retMap=readRes(url,key);
+			}
+		}
+		
+		return retMap;
+		 
+	}
+	
+	private HashMap readRes(URL url,String[] key) throws IOException {
+		String inline="";
+		HashMap retMap=new HashMap();
+		Scanner sc=null;
+		try {
+		sc=new Scanner(url.openStream());
+		while (sc.hasNext()) {
+			 
+			inline+=sc.nextLine();
+		}
+		
+		}finally {
+			sc.close();
+		}
+		
+	 JSONParser parser=new JSONParser();
+		JSONObject obj=(JSONObject)parser.parse(inline);
+		for(int i=0;i<key.length;i++) {
+			Object name=(Object)jobj.get(key[i]);
+			retMap.put(key[i], name);
+		}
+		return retMap;
+		
+	}
+
+}

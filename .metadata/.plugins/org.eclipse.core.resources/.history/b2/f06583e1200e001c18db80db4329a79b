@@ -1,0 +1,23 @@
+package com.myRetailApp.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.myRetailApp.Services.PriceServiceImpl;
+import com.myRetailApp.Services.ProductBeanServiceImpl;
+import com.myRetailApp.Services.ProductServiceImpl;
+
+@RestController
+public class RetailAppController {
+	
+	@Autowired
+	ProductServiceImpl svcImpl;
+	
+	@Autowired
+	PriceServiceImpl prsvcImpl;
+	
+	@Autowired
+	ProductBeanServiceImpl pdBeanImpl;
+
+
+}

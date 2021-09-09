@@ -1,0 +1,6 @@
+spring.demo.name="name"
+spring.demo.id="id"
+spring.demo.price="price"
+spring.demo.currency="currency"
+spring.demo.priceobj="Price"
+spring.demo.productobj="Product"

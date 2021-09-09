@@ -1,0 +1,5 @@
+package com.myRetailApp.Bean;
+
+public class Price {
+
+}

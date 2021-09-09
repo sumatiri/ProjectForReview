@@ -1,0 +1,12 @@
+spring.demo.name="name"
+spring.demo.id="id"
+spring.demo.price="price"
+spring.demo.currency="currency"
+spring.demo.priceobj="Price"
+spring.demo.productobj="Product"
+
+spring.jpa.hibernate.ddl-auto=none
+spring.datasource.url=jdbc:sqlserver://localhost:1433;databaseName=Product_DB
+spring.datasource.databaseName=Product_DB
+spring.datasource.username=sa
+spring.datasource.password=someThingComplicated1234

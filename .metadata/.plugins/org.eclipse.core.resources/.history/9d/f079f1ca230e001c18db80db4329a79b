@@ -1,0 +1,7 @@
+package com.myRetailApp.Bean;
+
+@ConfigurationProperties(prefix="spring.demo")
+@Configuration
+public class ConfProperties {
+
+}

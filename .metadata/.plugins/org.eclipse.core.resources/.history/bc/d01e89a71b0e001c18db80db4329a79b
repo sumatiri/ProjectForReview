@@ -1,0 +1,34 @@
+package com.myRetailApp.Services;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.myRetailApp.Bean.Price;
+import com.myRetailApp.Repository.PriceRepo;
+
+@Service
+
+public class PriceServiceImpl implements IPriceInfoService {
+
+	@Autowired
+	PriceRepo priceRep;
+	
+	
+	public Price getPriceDetails(String prodID) {
+		 Price pr=priceRep.getById(prodID);
+		 return pr;
+	}
+
+	@Override
+	public Price savePrice(Price prObject) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Price updatePrice(Price prObject) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}
