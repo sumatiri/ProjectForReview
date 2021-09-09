@@ -12,3 +12,9 @@ b) Provides Pricing Information-
    details are fetched , combined response is returned to client. Similarly with POST and PUT calls resources are created by invoking MyRetail APIs 
    
    Postman has been used for testing
+   
+   SQL Server Studio is used for DB. Two Tables are : Product and Price
+   Product has Id and ProductName
+   Price has Id, Price and Currency
+   
+   SpringBoot has been used to develop the APIs
